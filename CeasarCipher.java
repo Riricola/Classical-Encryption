@@ -3,8 +3,8 @@ import java.io.PrintWriter;
 public class CeasarCipher{
     public static void main(String[] args) throws Exception{
         if(args.length != 2){ //checks if user entered enough command arguments
-            System.exit(2);
             System.err.println("Incorrect number of Command Line Arguments.");
+            System.exit(2);
         } else{
             PrintWriter pen = new PrintWriter(System.out,true);
             String word = args[1];
