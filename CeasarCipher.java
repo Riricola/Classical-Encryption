@@ -23,10 +23,10 @@ public class CeasarCipher{
                 }//while
             }//if, else if
             pen.flush();
-        }//if    
+        }//else    
 }//main
 
-/*  encode(String, int) function
+/*  encode(String str, int n) function
 
     pre: string str must be the first argument user entered argument on the command line
 
@@ -57,7 +57,7 @@ public class CeasarCipher{
         return encodedMess;
     }//encode
 
-/*  decode(String, int) function
+/*  decode(String str, int n) function
 
     pre: string str must be the first argument user entered argument on the command line
 
