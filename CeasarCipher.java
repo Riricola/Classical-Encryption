@@ -1,78 +1,93 @@
-//encode and decode work in theory, but the 'n' doesnt wrap around like its supposed to
-//have the function take from the command line
-
 import java.io.PrintWriter;
 
 public class CeasarCipher{
     public static void main(String[] args) throws Exception{
-        PrintWriter pen = new PrintWriter(System.out,true);
-        //PrintWriter pen2 = new PrintWriter(System.error,true);
-
-        
-        //if(args[0].equals("encode") || args[0].equals("decode")){
-        //int base = 97;
-        String variable = "helloworld";
-        String variable2 = "dahhksknhz";
-
-        pen.printf(variable + "\n");
-        pen.printf(encode(variable, 1) + "\n");
-        pen.printf(decode(variable2, 2) + "\n");
-        pen.flush();
-        }
-        /*
-        else{
-            pen2.print("Incorrect number of parameters.");
-            System.err();
-            system.err.println()
-            System.exit();
+        if(args.length != 2){ //checks if user entered enough command arguments
+            System.exit(2);
+            System.err.println("Incorrect number of Command Line Arguments.");
+        } else{
+            PrintWriter pen = new PrintWriter(System.out,true);
+            String word = args[1];
             
-        }*/     
-        
-//main should take in a string from the terminal
+            if(args[0].equals("encode")){
+                int encodeKey = 0;
+                while(encodeKey != 26){
+                    pen.println("n = " + encodeKey + ": " + (encode(word, encodeKey)));
+                    encodeKey++;
+                }//while
+            } else if (args[0].equals("decode")){
+                int decodeKey = 0;
+                while(decodeKey != 26){
+                    pen.println("n = " + decodeKey + ": " + (decode(word, decodeKey)));
+                    decodeKey++;
+                }//while
+            }//if, else if
+            pen.flush();
+        }//if    
+}//main
 
-    public static String encode(String word, int n) throws Exception{
+/*  encode(String, int) function
+
+    pre: string str must be the first argument user entered argument on the command line
+
+    post: uses int n to perform the Ceasar Cipher method of encryption on string str
+*/
+    public static String encode(String str, int n) throws Exception{
         int base = 97;
-        // a - base = 0 ; z - base = 25
-        // 
-     
-    // then result + base
-
-        char[] letters = word.toCharArray();
+        char[] letters = str.toCharArray();
         //turns the string into an array of chracters
 
-        for(int i = 0; i < word.length(); i++){
+        for(int i = 0; i < str.length(); i++){//iterates through each character in str
             char temp = letters[i];
             //saves the character into temp
 
-            char newChar = (char) (temp - base);
-            newChar = (char) (temp + n);
-            //might need (char)
-            //does the math
-            if(newChar > 25){
-                newChar = (char)((newChar % 25) - 1);
-            }   
-
+            char newChar = (char) ((temp - base) + n);
+            //Sets the character to a 0-25 index, then adds the key "n"
+            newChar = (char)(newChar % 26);
+            //this perfors the 'wrap around' if necessary
             newChar = (char) (newChar + base);
-            //encrypts the char
+            //encrypts the char back to its appropriate char
+
             letters[i] = newChar;
             //puts the newly encrypted char back into the letters array
         }//for
+
         String encodedMess = new String(letters);
+        //glues the letters together into a string and returns it
         return encodedMess;
     }//encode
 
-    public static String decode(String word, int n) throws Exception{
-        char[] letters = word.toCharArray();
+/*  decode(String, int) function
 
-        for(int i = 0; i < word.length(); i++){
-            char newChar = (char) (word.charAt(i) - n);
-            letters[i] = newChar;
+    pre: string str must be the first argument user entered argument on the command line
 
-        }
+    post: uses int n to perform the Ceasar Cipher method of decryption on string str
+*/    
+
+    public static String decode(String str, int n) throws Exception{
+        int base = 97;
+        char[] letters = str.toCharArray();
+        //turns the string into an array of chracters
+
+        for(int i = 0; i < str.length(); i++){
+            char temp = letters[i];
+            //saves the character into temp
+
+            int newChar = (int) ((temp - base) - n);
+            //Sets the character to a 0-25 index, then adds the key "n"
+
+            if(newChar < 0){ //checks if the encrypted character is negative
+                newChar = (newChar + 26);//performs the wrap around
+            }//if
+
+            newChar = (char) (newChar + base);
+            //encrypts the char back to its appropriate char 
+            letters[i] = (char)newChar;
+            //puts the newly encrypted char back into the letters array
+        }//for
+
         String decodedMess = new String(letters);
+        //glues the letters together into a string and returns it
         return decodedMess;
     }//decode
-
-}
-
-
+}//Ceasar Cipher
