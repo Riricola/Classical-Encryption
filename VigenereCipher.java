@@ -10,35 +10,32 @@ public class VigenereCipher{
             String word = args[1];
             String key = args[2];
             String newKey = (keyStretcher(word,key));
-
-            if(args[0].equals("encode")){
+            
+            if(args[0].equals("encode")){ //checks for whether the code should perform an encode or decode
                 pen.println(encode(word, newKey));   
             } else if (args[0].equals("decode")){
                 pen.println(decode(word, newKey));
+            } else{ //error message incase user doesn't input "encode" or "decode"
+            System.err.println("Valid options are 'encode' or 'decode'.");
+            System.exit(2);
             }//else          
+            
             pen.flush();
         }//else   
 }//main
 
+/*  keyStretcher(String word, String key)
+ * pre: word and key must be strings entered by the user on the Command line
+ */
     public static String keyStretcher(String word, String key){
         int repeats = (word.length()) / (key.length());
-        //repeats = repeats + (word.length()) % (key.length());
-        String stretchedKey = key.repeat(repeats);
-        //char[] letters = stretchedKey.toCharArray();
+        //sets the amount of times we want the key to repeat equal to the amount of times the key
+        //can fit into the word's length
+        String stretchedKey = key.repeat(repeats + 1);
+        //repeats the key 'repeats' amount of times, plus an extra repeat so the new key is longer than the word
 
-        /* 
-        for(int i = 0; i < ((word.length()) % (key.length())); i++){
-            letters[(repeats * (word.length())) + i] = key.charAt(i);
-        }
-*/
-
-        char[] keySeparated = key.toCharArray();
-        for(int i = 0; i < ((word.length()) % (key.length())); i++){
-            keySeparated[i] = key.charAt(i);            
-        }
-        String leftovers = new String(keySeparated);
-
-        stretchedKey.concat(leftovers);
+        stretchedKey = stretchedKey.substring(0, (word.length()));
+        //cuts the lengthy key so it's length is equal to the word we are encode/decoding
 
         return stretchedKey;
     }//keyStretcher
