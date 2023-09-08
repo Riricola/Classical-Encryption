@@ -7,7 +7,7 @@ public class CeasarCipher{
             System.exit(2);
         } else{
             PrintWriter pen = new PrintWriter(System.out,true);
-            String word = args[1];
+            String word = args[1]; 
             
             if(args[0].equals("encode")){
                 int encodeKey = 0;
@@ -21,7 +21,11 @@ public class CeasarCipher{
                     pen.println("n = " + decodeKey + ": " + (decode(word, decodeKey)));
                     decodeKey++;
                 }//while
-            }//if, else if
+            } else{ //error message incase user doesn't input "encode" or "decode"
+                System.err.println("Valid options are 'encode' or 'decode'.");
+                System.exit(2);
+            }//else
+            
             pen.flush();
         }//else    
 }//main
@@ -90,4 +94,5 @@ public class CeasarCipher{
         //glues the letters together into a string and returns it
         return decodedMess;
     }//decode
+
 }//Ceasar Cipher
