@@ -1,4 +1,5 @@
 # Classical-Encryption
+Maria Rodriguez
 Mini Project 1
 
 I have two java files, Ceasar Cipher and Vigenere Cipher, both performing their respective cipher. To run Ceasar 
