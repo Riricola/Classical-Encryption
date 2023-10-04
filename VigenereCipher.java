@@ -1,6 +1,10 @@
 import java.io.PrintWriter;
 
-// add a citation of where i found the .repeat() method
+/*    VigenereCipher
+*    takes in a word to be encoded/decoded, a keyword specifying whether the user wants 
+*    to perform an encryption or decryption, and a key that gets stretched to fit the length
+*    of the word we are performing the cypher on. Returns the encrypted/decrypted word to the user
+*/
 public class VigenereCipher {
     public static void main(String[] args) throws Exception {
         if (args.length != 3) { // checks if user entered enough command arguments
