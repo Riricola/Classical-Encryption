@@ -1,5 +1,10 @@
 import java.io.PrintWriter;
 
+/*    CaesarCipher
+*    takes in a word to be encoded/decoded, and a keyword specifying whether the user wants 
+*    to perform an encryption or decryption. Results are printed for using the numbers
+*    0-25 to encrypt/decrypt the word.
+*/
 public class CaesarCipher {
     public static void main(String[] args) throws Exception {
         if (args.length != 2) { // checks if user entered enough command arguments
